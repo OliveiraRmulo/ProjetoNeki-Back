@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.neki.projetonekiback.dto.UserExibirDTO;
 import org.neki.projetonekiback.dto.UserInserirDTO;
+import org.neki.projetonekiback.entity.UserEntity;
 import org.neki.projetonekiback.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -105,4 +106,8 @@ public class UserController {
 		return ResponseEntity.noContent().build();
 	}
 	
+		@PostMapping("/login")
+		private UserEntity login(UserEntity user){
+			return userService.login(user);
+		}
 }

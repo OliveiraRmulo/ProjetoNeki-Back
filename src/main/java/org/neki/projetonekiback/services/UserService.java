@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.neki.projetonekiback.dto.UserExibirDTO;
 import org.neki.projetonekiback.dto.UserInserirDTO;
 import org.neki.projetonekiback.entity.UserEntity;
+import org.neki.projetonekiback.exception.GlobalException;
 import org.neki.projetonekiback.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +21,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	//Listar todos
 	public List<UserExibirDTO> findAll() {
@@ -79,5 +83,23 @@ public class UserService {
 		return true;
 		
 	}
+	
+	//login
+		public void updateLastLogin(Long id) {
+
+		}
+		
+		public UserEntity login (UserEntity user) {
+			if(userRepository.findByLogin(user.getLogin()) == null) {
+				throw new GlobalException("Usuário não encontrado");
+			}
+			UserEntity usr = userRepository.findByLogin(user.getLogin());
+			if(passwordEncoder.matches(user.getPassword(), usr.getPassword())) {
+				updateLastLogin(usr.getId());
+				return usr;
+			} else {
+				throw new GlobalException("Senha inválida");
+			}
+		}
 	
 }
