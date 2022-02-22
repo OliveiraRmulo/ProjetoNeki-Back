@@ -1,0 +1,96 @@
+package org.neki.projetonekiback.dto;
+
+import java.time.LocalDate;
+
+import org.neki.projetonekiback.entity.SkillEntity;
+import org.neki.projetonekiback.entity.UserEntity;
+import org.neki.projetonekiback.entity.UserSkillEntity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class UserSkillExibirDTO {
+	
+	private Long id;
+	private Long knowledgeLevel;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate created_at;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate updated_at;
+	private UserEntity user;
+	private SkillEntity skill;
+	
+	public UserSkillExibirDTO() {
+			super();
+	}
+
+	public UserSkillExibirDTO(Long id, Long knowledgeLevel, LocalDate created_at, LocalDate updated_at, UserEntity user,
+			SkillEntity skill) {
+		super();
+		this.id = id;
+		this.knowledgeLevel = knowledgeLevel;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+		this.user = user;
+		this.skill = skill;
+	}
+
+	public UserSkillExibirDTO(UserSkillEntity userSkill) {
+		super();
+		this.id = userSkill.getId();
+		this.knowledgeLevel = userSkill.getKnowledgeLevel();
+		this.created_at = userSkill.getCreated_at();
+		this.updated_at = userSkill.getUpdated_at();
+		this.user = userSkill.getUser();
+		this.skill = userSkill.getSkill();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getknowledgeLevel() {
+		return knowledgeLevel;
+	}
+
+	public void setknowledgeLevel(Long knowledgeLevel) {
+		this.knowledgeLevel = knowledgeLevel;
+	}
+
+	public LocalDate getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(LocalDate created_at) {
+		this.created_at = created_at;
+	}
+
+	public LocalDate getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(LocalDate updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
+	public SkillEntity getSkill() {
+		return skill;
+	}
+
+	public void setSkill(SkillEntity skill) {
+		this.skill = skill;
+	}
+
+	
+}
